@@ -44,6 +44,20 @@ uint64_t ofxMSATimer::getAppTimeMicros(){
 	return (mach_absolute_time() - machStartTime) * info.numer / (info.denom * 1000);	
 }
 
+//fumiki
+#elif defined(TARGET_OF_IPHONE)
+
+ofxMSATimer::ofxMSATimer(){
+    mach_timebase_info(&info);
+    machStartTime = mach_absolute_time();
+    getMicrosSinceLastCall();
+}
+
+uint64_t ofxMSATimer::getAppTimeMicros(){
+	return (mach_absolute_time() - machStartTime) * info.numer / (info.denom * 1000);
+}
+
+
 #elif defined(TARGET_WIN32)
 
 ofxMSATimer::ofxMSATimer(){

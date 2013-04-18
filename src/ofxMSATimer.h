@@ -39,6 +39,10 @@
 #elif defined(TARGET_OSX)
 	#include <sys/time.h>
 	#include <mach/mach_time.h>
+//fumiki
+#elif defined(TARGET_OF_IPHONE)
+    #include <sys/time.h>
+    #include <mach/mach_time.h>
 #elif defined(TARGET_LINUX)
 	#include "time.h"
 	#include <inttypes.h>
@@ -73,6 +77,10 @@ protected:
     LARGE_INTEGER ticksPerSecond;
     LARGE_INTEGER startTime, stopTime;
 	#elif defined(TARGET_OSX)
+    mach_timebase_info_data_t info;
+    uint64_t machStartTime; //nanos
+    //fumiki
+    #elif defined(TARGET_OF_IPHONE)
     mach_timebase_info_data_t info;
     uint64_t machStartTime; //nanos
 	#elif defined(TARGET_LINUX)
